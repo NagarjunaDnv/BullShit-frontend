@@ -1,0 +1,176 @@
+<ion-content [fullscreen]="true" *ngIf="gameService.gameDetails && gameService.gameDetails['players']">
+  <div id="container">
+    <div class="player-1 c-p">
+      <div class="cards" *ngIf="gameService.gameDetails['players'].length> gameService.coordinates[2] && gameService.cards">
+        <div class="card" *ngFor="let n of (gameService.gameDetails['players'][ gameService.coordinates[2] ]['count'] | generate)">
+
+        </div>
+      </div>
+      <div class="player-profile">
+        <div class="child">
+          <div class="profile-icon" [ngClass]="{'selected': (gameService.gameDetails['players'].length>gameService.coordinates[2] && gameService.gameDetails['players'][ gameService.coordinates[2] ]['uid']===gameService['currentTurnId'])}">
+            {{ gameService.gameDetails['players'].length> gameService.coordinates[2] ? gameService.gameDetails['players'][ gameService.coordinates[2] ]['name'][0] : '' }}
+          </div>
+          <div class="bullets">
+
+          </div>
+        </div>
+        <div class="child name" *ngIf="gameService.gameDetails['players'].length>gameService.coordinates[2]">
+          <div class="online-status" [ngClass]="{'online': gameService.gameDetails['players'][ gameService.coordinates[2] ]['online']}">
+            &#9679;
+          </div>
+          {{ gameService.gameDetails['players'][ gameService.coordinates[2] ]['name'] }}
+        </div>
+        <div class="child name" *ngIf="gameService.gameDetails['players'].length<=gameService.coordinates[2]">
+          Player&nbsp;3
+        </div>
+      </div>
+    </div>
+    <div class="player-common c-l">
+      <div class="player-profile">
+        <div class="child">
+          <div class="profile-icon" [ngClass]="{'selected': (gameService.gameDetails['players'].length>gameService.coordinates[3] && gameService.gameDetails['players'][ gameService.coordinates[3] ]['uid']===gameService['currentTurnId'])}">
+            {{ gameService.gameDetails['players'].length>gameService.coordinates[3] ? gameService.gameDetails['players'][ gameService.coordinates[3] ]['name'][0] : '' }}
+          </div>
+          <div class="bullets">
+
+          </div>
+        </div>
+        <div class="child name" *ngIf="gameService.gameDetails['players'].length>gameService.coordinates[3]">
+          {{ gameService.gameDetails['players'][ gameService.coordinates[3] ]['name'] }}
+          <div class="online-status" [ngClass]="{'online': gameService.gameDetails['players'][ gameService.coordinates[3] ]['online']}">
+            &#9679;
+          </div>
+        </div>     
+        <div class="child name" *ngIf="gameService.gameDetails['players'].length<=gameService.coordinates[3]">
+          Player&nbsp;2
+        </div>         
+      </div>
+      <div class="cards" *ngIf="gameService.gameDetails['players'].length> gameService.coordinates[3] && gameService.cards">
+        <div class="card" *ngFor="let n of (gameService.gameDetails['players'][ gameService.coordinates[3] ]['count'] | generate)">
+
+        </div>
+      </div>
+    </div>
+    <div class="cards-text-cont">
+      <div class="cards-cont">
+        <div class="cards" *ngIf="!gameService.cards">
+          <div class="card" *ngFor="let n of ( 5|generate )">
+  
+          </div>
+        </div>
+        <div class="cards cards-declaration" *ngIf="gameService.currentDeclaration">
+          <div class="card" *ngFor="let n of (gameService.currentDeclaration['count'] | generate)">
+
+          </div>
+        </div>
+        <div class="stackCount" *ngIf="gameService.currentDeclaration">
+          {{ gameService.currentStackCount }}
+        </div>
+      </div>
+      <div class="live-text" *ngIf="gameService.currentDeclaration">
+        {{gameService.currentDeclaration['declaredBy']['id']===customService.currentUser.uid ? youText : gameService.currentDeclaration['declaredBy']['name'] }} declared {{gameService.currentDeclaration['count']}}x {{gameService.currentDeclaration['value']}}
+      </div>
+      <div class="live-text" *ngIf="gameService.currentLiarProposal && !gameService.currentDeclaration">
+        {{gameService.currentLiarProposal['from']['id']===customService.currentUser.uid ? youText : gameService.currentLiarProposal['from']['name'] }} called {{gameService.currentLiarProposal['to']['id']===customService.currentUser.uid ? 'you' : gameService.currentLiarProposal['to']['name'] }} a liar
+      </div>
+      <div class="live-text end" *ngIf="!gameService.cards">
+        Waiting for other players...
+      </div>
+      <div class="live-text" *ngIf="gameService.currentDeclaration && gameService.currentDeclaration['declaredBy']['id']!=customService.currentUser.uid && !isBullshitClicked">
+        <ion-button color="danger" (click)="bullshit()">BULLSH!T</ion-button>
+      </div>
+      <div class="live-text" *ngIf="gameService.cards && (gameService.gameDetails['players'][ gameService.coordinates[0] ]['uid']===gameService['currentTurnId']) && stack.length==0 && !isBullshitClicked">
+        <div *ngIf="gameService.currentStackDetailCount && gameService.currentStackDetailCount!=0">
+          OR
+        </div>
+        Choose your cards for {{ gameService['currentValue'] }}
+      </div>
+      <div class="live-text" *ngIf="gameService.cards && (gameService.gameDetails['players'][ gameService.coordinates[0] ]['uid']===gameService['currentTurnId']) && stack.length!=0 && !isBullshitClicked">
+        <ion-button (click)="addCards()" *ngIf="!hideButtons">ADD {{stack.length}}x {{gameService['currentValue']}} </ion-button>
+      </div>
+    </div>
+    <div class="player-common c-l c-r">
+      <div class="player-profile">
+        <div class="child">
+          <div class="profile-icon" [ngClass]="{'selected': (gameService.gameDetails['players'].length>gameService.coordinates[1] && gameService.gameDetails['players'][ gameService.coordinates[1] ]['uid']===gameService['currentTurnId'])}">
+            {{ gameService.gameDetails['players'].length>gameService.coordinates[1] ? gameService.gameDetails['players'][ gameService.coordinates[1] ]['name'][0] : '' }}
+          </div>
+          <div class="bullets">
+
+          </div>
+        </div>
+        <div class="child name" *ngIf="gameService.gameDetails['players'].length>gameService.coordinates[1]">
+          <div class="online-status" [ngClass]="{'online': gameService.gameDetails['players'][ gameService.coordinates[1] ]['online']}">
+            &#9679;
+          </div>
+          {{ gameService.gameDetails['players'][ gameService.coordinates[1] ]['name'] }}
+        </div>
+        <div class="child name" *ngIf="gameService.gameDetails['players'].length<=gameService.coordinates[1]">
+          Player&nbsp;4
+        </div>
+      </div>
+      <div class="cards" *ngIf="gameService.gameDetails['players'].length> gameService.coordinates[1] && gameService.cards">
+        <div class="card" *ngFor="let n of (gameService.gameDetails['players'][ gameService.coordinates[1] ]['count'] | generate)">
+
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      
+    </div>
+    <div class="player-you c-p">
+      <div class="cards" [ngClass]="{'low-o': gameService['currentTurnId']!=gameService.gameDetails['players'][ gameService.coordinates[0] ]['uid']}">
+        <div class="card" *ngFor="let card of gameService.cards;let i=index" (click)="selectCard(card,i)" [ngClass]="{'card-selected': cardSet.has(card.value+card.suit)}">
+          <div class="card-name">
+            {{ card['value'] }}
+          </div>
+          <div class="card-symbol" [ngClass]="{'red': (card['suit']==='hearts' || card['suit']==='diamonds'),'black': (card['suit']==='spades' || card['suit']==='clubs') }">
+            <span *ngIf="card['suit']==='diamonds'">&#9830;</span>
+            <span *ngIf="card['suit']==='hearts'">&#9829;</span>
+            <span *ngIf="card['suit']==='spades'">&#9824;</span>
+            <span *ngIf="card['suit']==='clubs'">&#9827;</span>
+          </div>
+          <div class="card-symbol-big" [ngClass]="{'red': (card['suit']==='hearts' || card['suit']==='diamonds'),'black': (card['suit']==='spades' || card['suit']==='clubs') }">
+            <span *ngIf="card['suit']==='diamonds'">&#9830;</span>
+            <span *ngIf="card['suit']==='hearts'">&#9829;</span>
+            <span *ngIf="card['suit']==='spades'">&#9824;</span>
+            <span *ngIf="card['suit']==='clubs'">&#9827;</span>
+          </div>
+        </div>
+      </div>
+      <div class="player-profile">
+        <div class="child">
+          <div class="profile-icon" [ngClass]="{'selected': (gameService.gameDetails['players'][ gameService.coordinates[0] ]['uid']===gameService['currentTurnId'])}">
+            {{ gameService.gameDetails['players'][ gameService.coordinates[0] ]['name'][0] }}
+          </div>
+          <div class="bullets">
+
+          </div>
+        </div>
+        <div class="child name">
+          <div class="online-status" [ngClass]="{'online': gameService.gameDetails['players'][ gameService.coordinates[0] ]['online']}">
+            &#9679;
+          </div>
+          {{ gameService.gameDetails['players'][ gameService.coordinates[0] ]['name'] }}
+          <div class="revealed-cards" *ngIf="gameService.revealedCards">
+            <div class="card" *ngFor="let card of gameService.revealedCards">
+              <div class="card-name">
+                {{ card['value'] }}
+              </div>
+              <div class="card-symbol" [ngClass]="{'red': (card['suit']==='hearts' || card['suit']==='diamonds'),'black': (card['suit']==='spades' || card['suit']==='clubs') }">
+                <span *ngIf="card['suit']==='diamonds'">&#9830;</span>
+                <span *ngIf="card['suit']==='hearts'">&#9829;</span>
+                <span *ngIf="card['suit']==='spades'">&#9824;</span>
+                <span *ngIf="card['suit']==='clubs'">&#9827;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="winner-cont" *ngIf="gameService.winnerText">
+      {{ gameService.winnerText }}
+    </div>
+  </div>
+</ion-content>

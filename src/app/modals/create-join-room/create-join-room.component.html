@@ -1,0 +1,39 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense" class="custom-padding">
+    <ion-toolbar>
+      <ion-title size="large">{{ headerText }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="type!=2">
+      <ion-fab-button (click)="goBack()" color="danger">
+        <ion-icon name="arrow-back-circle"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <div class="input-cont" *ngIf="type===0">
+      <div class="input">
+        <ion-item style="margin-left: -15px;">
+          <ion-input placeholder="Enter a room id" inputmode="tel" maxlength="6" mode="ios" [(ngModel)]="roomId" spellcheck="false"></ion-input>
+        </ion-item>
+        <ion-button expand="block" color="danger" (click)="createRoom()" class="margin-big">Create Room</ion-button>
+      </div>
+    </div>
+    <div class="input-cont" *ngIf="type===1">
+      <div class="input">
+        <ion-item style="margin-left: -15px;">
+          <ion-input placeholder="Enter a room id" inputmode="numeric" maxlength="6" mode="ios" [(ngModel)]="roomId" spellcheck="false"></ion-input>
+        </ion-item>
+        <ion-button expand="block" color="danger" (click)="joinRoom()" class="margin-big">Join Room</ion-button>
+      </div>
+    </div>
+    <div class="input-cont" *ngIf="type===2">
+      <div class="input">
+        <ion-item style="margin-left: -15px;">
+          <ion-input placeholder="Enter your name" inputmode="text" mode="ios" [(ngModel)]="name" spellcheck="false"></ion-input>
+        </ion-item>
+        <ion-button expand="block" color="danger" (click)="setDisplayName()" class="margin-big">Save Name</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

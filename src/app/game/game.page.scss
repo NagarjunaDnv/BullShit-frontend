@@ -1,0 +1,292 @@
+#container{
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.player-1{
+    width: 100%;
+    height: 15%;
+}
+.player-common{
+    width: 20%;
+    height: 35%;
+}
+.cards-text-cont{
+    width: 60%;
+    height: 35%;
+    position: relative;
+}
+.actions{
+    width: 100%;
+    height: 10%;
+}
+
+.player-you{
+    width: 100%;
+    height: 40%;
+}
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.card{
+    margin-right: -71px;
+}
+.player-you{
+    .cards{
+        margin: 12px;
+        margin-right: 68px;
+        margin-bottom: 75px;
+    }
+    .card{
+        background: #FFFFFF;
+        margin-bottom: -70px;
+        margin-right: -55px;
+        border: 1px solid #EAEAEA;
+        transition: 0.2s;
+    }
+    .card-selected{
+        margin-top: -20px;
+        transition: 0.2s;
+        box-shadow: 0 0 2px 3px #28ba62;
+    }
+}
+.player-1 {
+    .cards{
+        margin-right: 68px;
+        .card{
+            margin-top: -78px;
+        }
+    }
+    .player-profile{
+        margin-top: 10px;
+    }
+
+}
+.card{
+    padding: 5px;
+    background: #0e0d12;
+    color: black;
+    border-radius: 4px;
+    height: 100px;
+    font-weight: 700;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    width: 75px;
+    border:1px solid #575656;
+    .card-symbol{
+        font-size: 20px;
+        line-height: 20px;
+        margin-top: -4px;
+    }
+    .card-symbol-big{
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        font-size: 50px;
+        line-height: 35px;
+    }
+}
+
+.c-p{
+    .player-profile{
+        width: 100%;
+       .child{
+           width: 100%;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+       }
+       .name{
+           margin-top: 5px;
+           font-size: 12px;
+           font-weight: bolder;
+       }
+    }
+}
+.c-l{
+    .player-profile{
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        padding-bottom: 10px;
+        .name{
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bolder;
+            margin-left: 5px;
+        }  
+    }
+}
+.profile-icon{
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: #124051;
+    font-size: 12px;
+    font-weight: bolder;
+}
+.profile-icon.selected{
+    border:2px solid #40a38f
+}
+.player-common{
+    .cards{
+        flex-direction: column;
+        margin-top: 45px;
+        .card{
+            margin: 0;
+            margin-bottom: -79px;
+            width: 100px;
+            height: 75px;
+            margin-left: -78px;
+        }
+    }
+}
+.player-common.c-r{
+    position: relative;
+    .cards{
+        position: absolute;
+        right: -78px;
+        .card{
+            margin-left: 49px;
+        }
+    }
+    .player-profile{
+        padding-right: 10px;
+        padding-bottom: 10px;
+        flex-direction: row-reverse;
+        .name{
+            margin-right: 5px;
+        }  
+    }
+}
+
+.red{
+    color: red !important;
+}
+.black{
+    color: black !important;
+}
+
+.cards-cont{
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    margin-top: 22px;
+    position: relative;
+    .cards{
+        flex-direction: column;
+        .card{
+            margin-right: 0px;
+            margin-bottom: -101px;
+        }
+    }
+    .cards-declaration{
+        flex-direction: row;
+        .card{
+            margin-bottom: 0;
+            margin-right: -60px;
+        }
+        .card:last-child{
+            margin-right: 0;
+        }
+    }
+    .stackCount{
+        position: absolute;
+        bottom: -12.5px;
+        width: 25px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 25px;
+        font-size: 14px;
+        background: crimson;
+        border-radius: 50%;
+        font-weight: 600;
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+.live-text{
+    font-size: 14px;
+    margin-top: 15px;
+    text-align: center;
+    font-family: sans-serif;
+}
+.end{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.low-o{
+    opacity: 0.4 !important;
+}
+ion-button.button{
+    height: 32px !important;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: sans-serif;
+}
+.online-status{
+    font-size: 16px;
+    color: #6f6d6d;
+    margin-right: 3px;
+}
+.online{
+    color: #4acb4a;
+}
+.c-l{
+    .online-status{
+        margin-right: 0;
+        margin-left: 3px;
+    }
+}
+.c-l.c-r{
+    .online-status{
+        margin-right: 3px;
+        margin-left: 0;
+    }
+}
+.player-you{
+    .revealed-cards{
+        position: absolute;
+        display: flex;
+        right: 0;
+        opacity: 0.4;
+        .card{
+            width: 30px;
+            height: 40px;
+            margin-bottom: 0;
+            margin-right: -15px;
+            border: 1px solid #c2c1c1;
+            .card-name{
+                font-size: 8px;
+            }
+            .card-symbol{
+                font-size: 12px;
+            }
+        }
+        .card:last-child{
+            margin-right: 15px;
+        }
+    }
+}
+.winner-cont{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    background: rgba(0,0,0,0.5);
+    align-items: center;
+}
