@@ -16,12 +16,13 @@ export class CreateJoinRoomComponent implements OnInit {
   @Input() headerText:string;
   roomId:any;
   name:any;  
+  bulletCount:any="-1";
   constructor(
     private modalController: ModalController,
     private socket:Socket,
     private router:Router,
-    private gameService: GameService,
-    private customService: CustomService
+    public gameService: GameService,
+    public customService: CustomService
   ) { }
 
   ngOnInit() {
@@ -33,6 +34,7 @@ export class CreateJoinRoomComponent implements OnInit {
       const reqObj={
         name: this.customService.currentUser.displayName ? this.customService.currentUser.displayName : 'Nibba',
         roomId: this.roomId,
+        bulletLimit: parseInt(this.bulletCount),
         uid: this.customService.currentUser.uid
       }
       this.socket.emit('createRoom',reqObj,this.navigateToGamePage.bind(this));
@@ -97,4 +99,5 @@ export class CreateJoinRoomComponent implements OnInit {
   goBack(){
     this.modalController.dismiss();
   }
+
 }

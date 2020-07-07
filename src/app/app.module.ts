@@ -15,10 +15,12 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
 import { CommonModule } from '@angular/common';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 let config:SocketIoConfig={
-  url: "https://bullshit-game96.herokuapp.com",
+  // url: "https://bullshit-game96.herokuapp.com",
+  url:"http://localhost:8000",
   options:{}
 }
 
@@ -34,6 +36,7 @@ let config:SocketIoConfig={
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ],
   providers: [
     StatusBar,

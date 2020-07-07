@@ -1,11 +1,13 @@
 #container {
   text-align: center;
-
   position: absolute;
   left: 0;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #container strong {
@@ -14,6 +16,8 @@
 }
 .cont{
   padding: 0 15px;
+  width: 100%;
+  max-width: 500px;
   ion-button{
     margin-bottom: 10px;
   }

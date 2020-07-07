@@ -16,6 +16,21 @@
         <ion-item style="margin-left: -15px;">
           <ion-input placeholder="Enter a room id" inputmode="tel" maxlength="6" mode="ios" [(ngModel)]="roomId" spellcheck="false"></ion-input>
         </ion-item>
+        <ion-list style="margin-left: -15px;">
+          <ion-radio-group [(ngModel)]="bulletCount">
+            <ion-list-header>
+              <ion-label>Bullets Limit</ion-label>
+            </ion-list-header>
+            <ion-item>
+              <ion-label>No limit</ion-label>
+              <ion-radio slot="start" value="-1"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>3</ion-label>
+              <ion-radio slot="start" value="3"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
         <ion-button expand="block" color="danger" (click)="createRoom()" class="margin-big">Create Room</ion-button>
       </div>
     </div>

@@ -1,3 +1,4 @@
+<!-- Bullets UI yet to be updated -->
 <ion-content [fullscreen]="true" *ngIf="gameService.gameDetails && gameService.gameDetails['players']">
   <div id="container">
     <div class="player-1 c-p">
@@ -11,18 +12,22 @@
           <div class="profile-icon" [ngClass]="{'selected': (gameService.gameDetails['players'].length>gameService.coordinates[2] && gameService.gameDetails['players'][ gameService.coordinates[2] ]['uid']===gameService['currentTurnId'])}">
             {{ gameService.gameDetails['players'].length> gameService.coordinates[2] ? gameService.gameDetails['players'][ gameService.coordinates[2] ]['name'][0] : '' }}
           </div>
-          <div class="bullets">
-
-          </div>
         </div>
         <div class="child name" *ngIf="gameService.gameDetails['players'].length>gameService.coordinates[2]">
           <div class="online-status" [ngClass]="{'online': gameService.gameDetails['players'][ gameService.coordinates[2] ]['online']}">
             &#9679;
           </div>
           {{ gameService.gameDetails['players'][ gameService.coordinates[2] ]['name'] }}
+          <div class="bullets" *ngIf="gameService.gameDetails['bulletLimit']!=-1">
+            <img src="../../assets/bullet.svg" *ngFor="let x of (gameService.gameDetails['players'][ gameService.coordinates[2] ]['bulletCount'] | generate)">
+            <img src="../../assets/bullet-gray.svg" *ngFor="let y of ( (3-gameService.gameDetails['players'][ gameService.coordinates[2] ]['bulletCount']) | generate)">
+          </div>
         </div>
         <div class="child name" *ngIf="gameService.gameDetails['players'].length<=gameService.coordinates[2]">
           Player&nbsp;3
+          <div class="bullets" *ngIf="gameService.gameDetails['bulletLimit']!=-1">
+            <img src="../../assets/bullet.svg" *ngFor="let x of (3|generate)">
+          </div>
         </div>
       </div>
     </div>
@@ -32,18 +37,22 @@
           <div class="profile-icon" [ngClass]="{'selected': (gameService.gameDetails['players'].length>gameService.coordinates[3] && gameService.gameDetails['players'][ gameService.coordinates[3] ]['uid']===gameService['currentTurnId'])}">
             {{ gameService.gameDetails['players'].length>gameService.coordinates[3] ? gameService.gameDetails['players'][ gameService.coordinates[3] ]['name'][0] : '' }}
           </div>
-          <div class="bullets">
-
-          </div>
         </div>
         <div class="child name" *ngIf="gameService.gameDetails['players'].length>gameService.coordinates[3]">
           {{ gameService.gameDetails['players'][ gameService.coordinates[3] ]['name'] }}
           <div class="online-status" [ngClass]="{'online': gameService.gameDetails['players'][ gameService.coordinates[3] ]['online']}">
             &#9679;
           </div>
+          <div class="bullets" *ngIf="gameService.gameDetails['bulletLimit']!=-1">
+            <img src="../../assets/bullet.svg" *ngFor="let x of (gameService.gameDetails['players'][ gameService.coordinates[3] ]['bulletCount'] | generate)">
+            <img src="../../assets/bullet-gray.svg" *ngFor="let y of ( (3-gameService.gameDetails['players'][ gameService.coordinates[3] ]['bulletCount']) | generate)">
+          </div>
         </div>     
         <div class="child name" *ngIf="gameService.gameDetails['players'].length<=gameService.coordinates[3]">
           Player&nbsp;2
+          <div class="bullets" *ngIf="gameService.gameDetails['bulletLimit']!=-1">
+            <img src="../../assets/bullet.svg" *ngFor="let x of (3|generate)">
+          </div>
         </div>         
       </div>
       <div class="cards" *ngIf="gameService.gameDetails['players'].length> gameService.coordinates[3] && gameService.cards">
@@ -77,11 +86,11 @@
       <div class="live-text end" *ngIf="!gameService.cards">
         Waiting for other players...
       </div>
-      <div class="live-text" *ngIf="gameService.currentDeclaration && gameService.currentDeclaration['declaredBy']['id']!=customService.currentUser.uid && !isBullshitClicked">
+      <div class="live-text" *ngIf="gameService.currentDeclaration && gameService.currentDeclaration['declaredBy']['id']!=customService.currentUser.uid && !isBullshitClicked && (gameService.gameDetails['players'][ gameService.coordinates[0] ]['bulletCount']!=0)">
         <ion-button color="danger" (click)="bullshit()">BULLSH!T</ion-button>
       </div>
       <div class="live-text" *ngIf="gameService.cards && (gameService.gameDetails['players'][ gameService.coordinates[0] ]['uid']===gameService['currentTurnId']) && stack.length==0 && !isBullshitClicked">
-        <div *ngIf="gameService.currentStackDetailCount && gameService.currentStackDetailCount!=0">
+        <div *ngIf="gameService.currentStackCount && gameService.currentStackCount!=0 && (gameService.gameDetails['players'][ gameService.coordinates[0] ]['bulletCount']!=0)">
           OR
         </div>
         Choose your cards for {{ gameService['currentValue'] }}
@@ -96,18 +105,22 @@
           <div class="profile-icon" [ngClass]="{'selected': (gameService.gameDetails['players'].length>gameService.coordinates[1] && gameService.gameDetails['players'][ gameService.coordinates[1] ]['uid']===gameService['currentTurnId'])}">
             {{ gameService.gameDetails['players'].length>gameService.coordinates[1] ? gameService.gameDetails['players'][ gameService.coordinates[1] ]['name'][0] : '' }}
           </div>
-          <div class="bullets">
-
-          </div>
         </div>
         <div class="child name" *ngIf="gameService.gameDetails['players'].length>gameService.coordinates[1]">
           <div class="online-status" [ngClass]="{'online': gameService.gameDetails['players'][ gameService.coordinates[1] ]['online']}">
             &#9679;
           </div>
           {{ gameService.gameDetails['players'][ gameService.coordinates[1] ]['name'] }}
+          <div class="bullets" *ngIf="gameService.gameDetails['bulletLimit']!=-1">
+            <img src="../../assets/bullet.svg" *ngFor="let x of (gameService.gameDetails['players'][ gameService.coordinates[1] ]['bulletCount'] | generate)">
+            <img src="../../assets/bullet-gray.svg" *ngFor="let y of ( (3-gameService.gameDetails['players'][ gameService.coordinates[1] ]['bulletCount']) | generate)">
+          </div>
         </div>
-        <div class="child name" *ngIf="gameService.gameDetails['players'].length<=gameService.coordinates[1]">
+        <div class="child name" *ngIf="gameService.gameDetails['players'].length<=gameService.coordinates[1]" style="position: relative;">
           Player&nbsp;4
+          <div class="bullets" *ngIf="gameService.gameDetails['bulletLimit']!=-1">
+            <img src="../../assets/bullet.svg" *ngFor="let x of (3|generate)">
+          </div>
         </div>
       </div>
       <div class="cards" *ngIf="gameService.gameDetails['players'].length> gameService.coordinates[1] && gameService.cards">
@@ -141,11 +154,14 @@
       </div>
       <div class="player-profile">
         <div class="child">
-          <div class="profile-icon" [ngClass]="{'selected': (gameService.gameDetails['players'][ gameService.coordinates[0] ]['uid']===gameService['currentTurnId'])}">
-            {{ gameService.gameDetails['players'][ gameService.coordinates[0] ]['name'][0] }}
-          </div>
-          <div class="bullets">
-
+          <div style="position: relative;">
+            <div class="profile-icon" [ngClass]="{'selected': (gameService.gameDetails['players'][ gameService.coordinates[0] ]['uid']===gameService['currentTurnId'])}">
+              {{ gameService.gameDetails['players'][ gameService.coordinates[0] ]['name'][0] }}
+            </div>
+            <div class="bullets" *ngIf="gameService.gameDetails['bulletLimit']!=-1">
+              <img src="../../assets/bullet.svg" *ngFor="let x of (gameService.gameDetails['players'][ gameService.coordinates[0] ]['bulletCount'] | generate)">
+              <img src="../../assets/bullet-gray.svg" *ngFor="let y of ( (3-gameService.gameDetails['players'][ gameService.coordinates[0] ]['bulletCount']) | generate)">
+            </div>
           </div>
         </div>
         <div class="child name">

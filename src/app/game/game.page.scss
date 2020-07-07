@@ -124,8 +124,8 @@
     }
 }
 .profile-icon{
-    width: 22px;
-    height: 22px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     display: inline-flex;
     justify-content: center;
@@ -289,4 +289,50 @@ ion-button.button{
     justify-content: center;
     background: rgba(0,0,0,0.5);
     align-items: center;
+}
+.bullets{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -40px;
+    display: flex;
+    img{
+        width: 19px;
+        height: 19px;
+        margin-right: -9px;
+    }
+    img:last-child{
+        margin-right: 0;
+    }
+}
+.c-l{
+    .child{
+        position: relative;
+    }
+    .bullets{
+        left: 50%;
+        transform: translateX(-50%);
+        right: unset;
+        top: 100%;
+        margin-top: 4px;
+        img{
+            margin-left: -9px;
+            margin-right: 0;
+        }
+    }
+}
+.player-1{
+    .child{
+        position: relative;
+    }
+    .bullets{
+        left: 50%;
+        transform: translateX(-50%);
+        right: unset;
+        top: 100%;
+        margin-top: 4px;
+        img{
+
+        }
+    }
 }

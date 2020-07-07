@@ -19,7 +19,7 @@ export class GamePage implements OnInit {
   youText:string='You';
   constructor(
     public gameService: GameService,
-    private customService: CustomService,
+    public customService: CustomService,
     private socket: Socket,
     private router: Router
   ) { }
