@@ -19,8 +19,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 let config:SocketIoConfig={
-  // url: "https://bullshit-game96.herokuapp.com",
-  url:"http://localhost:8000",
+  url: "https://bullshit-game96.herokuapp.com",
   options:{}
 }
 
