@@ -22,7 +22,7 @@
     <div class="input-cont" *ngIf="type===1">
       <div class="input">
         <ion-item style="margin-left: -15px;">
-          <ion-input placeholder="Enter a room id" inputmode="numeric" maxlength="6" mode="ios" [(ngModel)]="roomId" spellcheck="false"></ion-input>
+          <ion-input placeholder="Enter a room id" inputmode="tel" maxlength="6" mode="ios" [(ngModel)]="roomId" spellcheck="false"></ion-input>
         </ion-item>
         <ion-button expand="block" color="danger" (click)="joinRoom()" class="margin-big">Join Room</ion-button>
       </div>

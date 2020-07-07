@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './services/auth.service';
 import { Plugins } from '@capacitor/core';
 import { Router } from '@angular/router';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+
 const {App}=Plugins;
 
 @Component({
@@ -19,22 +21,35 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private screenOrientation: ScreenOrientation
   ) {
     this.initializeApp();
-    this.platform.backButton.subscribeWithPriority(-1, () => {
+    this.platform.backButton.subscribeWithPriority(1, async() => {
       if (this.router.url==='' || this.router.url==='home') {
         App.exitApp();
       }
       else if(this.router.url==='game'){
-
+        return;
       }
     });
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      if(this.platform.is('ios')){
+        this.statusBar.overlaysWebView(false);
+        this.statusBar.backgroundColorByHexString('#B3000000');
+        this.statusBar.styleLightContent();
+        this.statusBar.show();
+        this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      }
+      if(this.platform.is('android')){
+        this.statusBar.overlaysWebView(false);
+        this.statusBar.backgroundColorByHexString('#B3000000');
+        this.statusBar.show();
+        this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      }
       this.splashScreen.hide();
       this.authService.onAuthStateChanged();
       this.authService.signInAnonymously();

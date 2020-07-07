@@ -10,14 +10,15 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
 import { CommonModule } from '@angular/common';
-import { GeneratePipe } from './pipes/generate.pipe';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+
 
 let config:SocketIoConfig={
-  url: "http://localhost:8000",
+  url: "https://bullshit-game96.herokuapp.com",
   options:{}
 }
 
@@ -32,12 +33,13 @@ let config:SocketIoConfig={
     SocketIoModule.forRoot(config),
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
     ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    ScreenOrientation
   ],
   bootstrap: [AppComponent]
 })
