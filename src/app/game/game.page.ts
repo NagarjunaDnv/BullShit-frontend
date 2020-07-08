@@ -42,7 +42,7 @@ import { trigger, transition, style, animate, query, stagger, animateChild } fro
       ]),
       transition(':leave', [
         style({ transform: "*", opacity: 1,}),
-        animate('2s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
+        animate('1.5s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
          style({ 
            transform: "translate(0,30vh)", opacity: 0
          }))
@@ -56,7 +56,7 @@ import { trigger, transition, style, animate, query, stagger, animateChild } fro
       ]),
       transition(':leave', [
         style({ transform: "*", opacity: 1,}),
-        animate('2s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
+        animate('1.5s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
          style({ 
            transform: "translate(50vw,-6vh) rotate(90deg)", opacity: 0
          }))
@@ -70,7 +70,7 @@ import { trigger, transition, style, animate, query, stagger, animateChild } fro
       ]),
       transition(':leave', [
         style({ transform: "*",opacity: 1}),
-        animate('2s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
+        animate('1.5s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
          style({ 
            transform: "translate(-50vw,-6vh) rotate(90deg)",
            opacity: 0
