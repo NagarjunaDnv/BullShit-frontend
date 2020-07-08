@@ -2,8 +2,8 @@
 <ion-content [fullscreen]="true" *ngIf="gameService.gameDetails && gameService.gameDetails['players']">
   <div id="container">
     <div class="player-1 c-p">
-      <div class="cards" *ngIf="gameService.gameDetails['players'].length> gameService.coordinates[2] && gameService.cards">
-        <div class="card" *ngFor="let n of (gameService.gameDetails['players'][ gameService.coordinates[2] ]['count'] | generate)">
+      <div @list class="cards" *ngIf="gameService.gameDetails['players'].length> gameService.coordinates[2] && gameService.cards">
+        <div @cards-top class="card" *ngFor="let n of (gameService.gameDetails['players'][ gameService.coordinates[2] ]['count'] | generate)">
 
         </div>
       </div>
@@ -55,8 +55,8 @@
           </div>
         </div>         
       </div>
-      <div class="cards" *ngIf="gameService.gameDetails['players'].length> gameService.coordinates[3] && gameService.cards">
-        <div class="card" *ngFor="let n of (gameService.gameDetails['players'][ gameService.coordinates[3] ]['count'] | generate)">
+      <div @list class="cards" *ngIf="gameService.gameDetails['players'].length> gameService.coordinates[3] && gameService.cards">
+        <div @cards-left class="card" *ngFor="let n of (gameService.gameDetails['players'][ gameService.coordinates[3] ]['count'] | generate)">
 
         </div>
       </div>
@@ -68,8 +68,8 @@
   
           </div>
         </div>
-        <div class="cards cards-declaration" *ngIf="gameService.currentDeclaration">
-          <div class="card" *ngFor="let n of (gameService.currentDeclaration['count'] | generate)">
+        <div @list class="cards cards-declaration" *ngIf="gameService.currentDeclaration">
+          <div @cards-declaration class="card" *ngFor="let n of (gameService.currentDeclaration['count'] | generate)">
 
           </div>
         </div>
@@ -80,7 +80,7 @@
       <div class="live-text" *ngIf="gameService.currentDeclaration">
         {{gameService.currentDeclaration['declaredBy']['id']===customService.currentUser.uid ? youText : gameService.currentDeclaration['declaredBy']['name'] }} declared {{gameService.currentDeclaration['count']}}x {{gameService.currentDeclaration['value']}}
       </div>
-      <div class="live-text" *ngIf="gameService.currentLiarProposal && !gameService.currentDeclaration">
+      <div class="live-text" @liar-proposal *ngIf="gameService.currentLiarProposal && !gameService.currentDeclaration">
         {{gameService.currentLiarProposal['from']['id']===customService.currentUser.uid ? youText : gameService.currentLiarProposal['from']['name'] }} called {{gameService.currentLiarProposal['to']['id']===customService.currentUser.uid ? 'you' : gameService.currentLiarProposal['to']['name'] }} a liar
       </div>
       <div class="live-text end" *ngIf="!gameService.cards">
@@ -123,8 +123,8 @@
           </div>
         </div>
       </div>
-      <div class="cards" *ngIf="gameService.gameDetails['players'].length> gameService.coordinates[1] && gameService.cards">
-        <div class="card" *ngFor="let n of (gameService.gameDetails['players'][ gameService.coordinates[1] ]['count'] | generate)">
+      <div @list class="cards" *ngIf="gameService.gameDetails['players'].length> gameService.coordinates[1] && gameService.cards">
+        <div @cards-right class="card" *ngFor="let n of (gameService.gameDetails['players'][ gameService.coordinates[1] ]['count'] | generate)">
 
         </div>
       </div>
@@ -133,8 +133,8 @@
       
     </div>
     <div class="player-you c-p">
-      <div class="cards" [ngClass]="{'low-o': gameService['currentTurnId']!=gameService.gameDetails['players'][ gameService.coordinates[0] ]['uid']}">
-        <div class="card" *ngFor="let card of gameService.cards;let i=index" (click)="selectCard(card,i)" [ngClass]="{'card-selected': cardSet.has(card.value+card.suit)}">
+      <div @list class="cards" [ngClass]="{'low-o': gameService['currentTurnId']!=gameService.gameDetails['players'][ gameService.coordinates[0] ]['uid']}">
+        <div @cards-bottom class="card" *ngFor="let card of gameService.cards;let i=index" (click)="selectCard(card,i)" [ngClass]="{'card-selected': cardSet.has(card.value+card.suit)}">
           <div class="card-name">
             {{ card['value'] }}
           </div>

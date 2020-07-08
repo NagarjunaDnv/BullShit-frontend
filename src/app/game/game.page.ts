@@ -3,11 +3,95 @@ import { GameService } from '../services/game.service';
 import { CustomService } from '../services/custom.service';
 import { Socket } from 'ngx-socket-io';
 import { Router } from '@angular/router';
+import { trigger, transition, style, animate, query, stagger, animateChild } from '@angular/animations';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.page.html',
   styleUrls: ['./game.page.scss'],
+  animations: [
+    trigger('list', [
+      transition(':enter', [
+        query('@cards-bottom', stagger(300,animateChild()),{optional:true}),
+        query('@cards-top', stagger(300,animateChild()),{optional:true}),
+        query('@cards-left', stagger(300,animateChild()),{optional:true}),
+        query('@cards-right', stagger(300,animateChild()),{optional:true}),
+        query('@cards-declaration', stagger(300,animateChild()),{optional:true})
+      ]),
+    ]),
+    trigger('cards-bottom', [
+      transition(':enter', [
+        style({ transform: 'scale(0.5)', opacity: 0 }),  // initial
+        animate('1s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
+          style({ transform: 'scale(1)', opacity: 1 }))  // final
+      ]),
+      transition(':leave', [
+        style({ transform: "*", opacity: 1, height: '*' }),
+        animate('1s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
+         style({ 
+           transform: "translate(0,-40vh)", opacity: 0, 
+           height: '0px'
+         }))
+      ])
+    ]),
+    trigger('cards-top',[
+      transition(':enter', [
+        style({ transform: 'scale(0.5)', opacity: 0 }),  // initial
+        animate('1s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
+          style({ transform: 'scale(1)', opacity: 1 }))  // final
+      ]),
+      transition(':leave', [
+        style({ transform: "*", opacity: 1,}),
+        animate('2s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
+         style({ 
+           transform: "translate(0,30vh)", opacity: 0
+         }))
+      ])
+    ]),
+    trigger('cards-left',[
+      transition(':enter', [
+        style({ transform: 'scale(0.5)', opacity: 0 }),  // initial
+        animate('1s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
+          style({ transform: 'scale(1)', opacity: 1 }))  // final
+      ]),
+      transition(':leave', [
+        style({ transform: "*", opacity: 1,}),
+        animate('2s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
+         style({ 
+           transform: "translate(50vw,-6vh) rotate(90deg)", opacity: 0
+         }))
+      ])
+    ]),
+    trigger('cards-right',[
+      transition(':enter', [
+        style({ transform: 'scale(0.5)', opacity: 0 }),  // initial
+        animate('1s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
+          style({ transform: 'scale(1)', opacity: 1 }))  // final
+      ]),
+      transition(':leave', [
+        style({ transform: "*",opacity: 1}),
+        animate('2s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
+         style({ 
+           transform: "translate(-50vw,-6vh) rotate(90deg)",
+           opacity: 0
+         }))
+      ])
+    ]),
+    trigger('cards-declaration',[
+      transition(':enter', [
+        style({ transform: 'scale(0.5)', opacity: 0 }),  // initial
+        animate('1s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
+          style({ transform: 'scale(1)', opacity: 1 }))  // final
+      ])
+    ]),
+    trigger('liar-proposal',[
+      transition(':enter', [
+        style({ transform: 'scale(0.5)', opacity: 0 }),  // initial
+        animate('1s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
+          style({ transform: 'scale(1)', opacity: 1 }))  // final
+      ])
+    ]),
+  ]
 })
 export class GamePage implements OnInit {
 
@@ -25,6 +109,7 @@ export class GamePage implements OnInit {
   ) { }
 
   ngOnInit() {
+
   }
   
   selectCard(card,indexInCardsArray){
@@ -89,11 +174,14 @@ export class GamePage implements OnInit {
       nextValue: this.findNextValue(this.gameService.currentValue)
     }
     this.gameService.currentStackCount+= JSON.parse(JSON.stringify(this.stack)).length;
-    this.gameService.currentDeclaration={
-      count: body.count,
-      declaredBy: body.declaredBy,
-      value: body.value
-    }
+    this.gameService.currentDeclaration= null;
+    setTimeout(()=>{
+      this.gameService.currentDeclaration={
+        count: body.count,
+        declaredBy: body.declaredBy,
+        value: body.value
+      }
+    },300);
     this.indices.sort((a,b)=>b-a);
     while(this.stack.length>0){
       const index=this.indices.shift();

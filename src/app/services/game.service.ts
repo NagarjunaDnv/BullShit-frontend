@@ -66,7 +66,10 @@ export class GameService {
   listenForDeclarations(){
     this.socket.on('declarations',res=>{
       console.log(res);
-      this.currentDeclaration=res;
+      this.currentDeclaration=null;
+      setTimeout(()=>{
+        this.currentDeclaration=res;
+      },300)
     })
   }
   listenForBullShitClicks(){
@@ -140,8 +143,13 @@ export class GameService {
   async presentToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
-      duration: 2000
+      duration: 3000,
+      color:'danger',
+      position:'top'
     });
+    setTimeout(()=>{
+      this.currentLiarProposal= null;
+    },2000);
     toast.present();
   }
   listenForLiarToasts(){

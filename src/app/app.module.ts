@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -19,7 +19,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 let config:SocketIoConfig={
-  url: "https://bullshit-game96.herokuapp.com",
+  // url: "https://bullshit-game96.herokuapp.com",
+  url: "http://localhost:8000",
   options:{}
 }
 
@@ -28,6 +29,7 @@ let config:SocketIoConfig={
   entryComponents: [],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     IonicModule.forRoot({mode:'ios'}),
     AppRoutingModule,
     CommonModule,
