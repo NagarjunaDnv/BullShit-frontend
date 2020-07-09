@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 interface Sound {
   key: string;
   asset: string;
