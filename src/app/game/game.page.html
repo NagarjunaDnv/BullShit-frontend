@@ -133,7 +133,7 @@
       
     </div>
     <div class="player-you c-p">
-      <div @list class="cards" [ngClass]="{'low-o': gameService['currentTurnId']!=gameService.gameDetails['players'][ gameService.coordinates[0] ]['uid']}">
+      <div @list class="cards" [ngClass]="{'low-o': gameService['currentTurnId']!=gameService.gameDetails['players'][ gameService.coordinates[0] ]['uid']}" *ngIf="gameService.cards">
         <div @cards-bottom class="card" *ngFor="let card of gameService.cards;let i=index" (click)="selectCard(card,i)" [ngClass]="{'card-selected': cardSet.has(card.value+card.suit)}">
           <div class="card-name">
             {{ card['value'] }}

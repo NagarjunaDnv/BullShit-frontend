@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -7,6 +7,7 @@ import { AuthService } from './services/auth.service';
 import { Plugins } from '@capacitor/core';
 import { Router } from '@angular/router';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { AudioService } from './services/audio.service';
 
 const {App}=Plugins;
 
@@ -15,14 +16,15 @@ const {App}=Plugins;
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private authService: AuthService,
     private router: Router,
-    private screenOrientation: ScreenOrientation
+    private screenOrientation: ScreenOrientation,
+    private audioService: AudioService
   ) {
     this.initializeApp();
     this.platform.backButton.subscribeWithPriority(1, async() => {
@@ -54,5 +56,11 @@ export class AppComponent {
       this.authService.onAuthStateChanged();
       this.authService.signInAnonymously();
     });
+  }
+
+  ngOnInit(){
+    this.audioService.preload('card-click','../../assets/click-sound.mp3');
+    this.audioService.preload('card-flip','../../assets/card-flip.mp3');
+    this.audioService.preload('card-declare','../../assets/card-declare.mp3');
   }
 }

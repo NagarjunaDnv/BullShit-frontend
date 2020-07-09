@@ -3,6 +3,7 @@ import { Socket } from 'ngx-socket-io';
 import { CustomService } from './custom.service';
 import { Router } from '@angular/router';
 import { ToastController, LoadingController } from '@ionic/angular';
+import { AudioService } from './audio.service';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,8 @@ export class GameService {
     private customService: CustomService,
     private router:Router,
     private toastController: ToastController,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private audioService: AudioService
   ) { }
 
   listenForPlayers(){
@@ -65,10 +67,18 @@ export class GameService {
   }
   listenForDeclarations(){
     this.socket.on('declarations',res=>{
-      console.log(res);
       this.currentDeclaration=null;
       setTimeout(()=>{
         this.currentDeclaration=res;
+        if(res!=null){
+          this.audioService.play('card-flip');
+          let interval=setInterval(()=>{
+            this.audioService.play('card-declare');
+          },400);
+          setTimeout(()=>{
+            clearTimeout(interval)
+          },res['count']*400);
+        }
       },300)
     })
   }

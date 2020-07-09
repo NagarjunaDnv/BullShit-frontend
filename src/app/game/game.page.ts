@@ -4,6 +4,7 @@ import { CustomService } from '../services/custom.service';
 import { Socket } from 'ngx-socket-io';
 import { Router } from '@angular/router';
 import { trigger, transition, style, animate, query, stagger, animateChild } from '@angular/animations';
+import { AudioService } from '../services/audio.service';
 
 @Component({
   selector: 'app-game',
@@ -42,7 +43,7 @@ import { trigger, transition, style, animate, query, stagger, animateChild } fro
       ]),
       transition(':leave', [
         style({ transform: "*", opacity: 1,}),
-        animate('1.5s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
+        animate('2s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
          style({ 
            transform: "translate(0,30vh)", opacity: 0
          }))
@@ -56,7 +57,7 @@ import { trigger, transition, style, animate, query, stagger, animateChild } fro
       ]),
       transition(':leave', [
         style({ transform: "*", opacity: 1,}),
-        animate('1.5s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
+        animate('2s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
          style({ 
            transform: "translate(50vw,-6vh) rotate(90deg)", opacity: 0
          }))
@@ -70,7 +71,7 @@ import { trigger, transition, style, animate, query, stagger, animateChild } fro
       ]),
       transition(':leave', [
         style({ transform: "*",opacity: 1}),
-        animate('1.5s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
+        animate('2s cubic-bezier(.8, -0.6, 0.2, 1.5)', 
          style({ 
            transform: "translate(-50vw,-6vh) rotate(90deg)",
            opacity: 0
@@ -105,7 +106,8 @@ export class GamePage implements OnInit {
     public gameService: GameService,
     public customService: CustomService,
     private socket: Socket,
-    private router: Router
+    private router: Router,
+    private audioService: AudioService
   ) { }
 
   ngOnInit() {
@@ -116,6 +118,7 @@ export class GamePage implements OnInit {
     if(this.gameService.currentTurnId!=this.customService.currentUser.uid){
       return false;
     }
+    this.audioService.play("card-click");
     const index=this.IndexInStack(card);
     if(index==-1){
       if(this.stack.length===4){
@@ -181,6 +184,13 @@ export class GamePage implements OnInit {
         declaredBy: body.declaredBy,
         value: body.value
       }
+      this.audioService.play('card-flip');
+      let interval=setInterval(()=>{
+        this.audioService.play('card-declare');
+      },400);
+      setTimeout(()=>{
+        clearTimeout(interval)
+      },body['count']*400);
     },300);
     this.indices.sort((a,b)=>b-a);
     while(this.stack.length>0){

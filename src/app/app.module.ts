@@ -16,11 +16,12 @@ import { environment } from 'src/environments/environment';
 import { CommonModule } from '@angular/common';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 
 let config:SocketIoConfig={
-  // url: "https://bullshit-game96.herokuapp.com",
-  url: "http://localhost:8000",
+  url: "https://bullshit-game96.herokuapp.com",
+  // url: "http://localhost:8000",
   options:{}
 }
 
@@ -43,7 +44,8 @@ let config:SocketIoConfig={
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    ScreenOrientation
+    ScreenOrientation,
+    NativeAudio
   ],
   bootstrap: [AppComponent]
 })
