@@ -16,7 +16,7 @@ const {App}=Plugins;
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -55,16 +55,17 @@ export class AppComponent implements OnInit{
       this.splashScreen.hide();
       this.authService.onAuthStateChanged();
       this.authService.signInAnonymously();
+      this.preloadAudios();
     });
   }
 
-  ngOnInit(){
+  preloadAudios(){
+    this.audioService.onAudioEnd();
     this.audioService.preload('card-click','../../assets/click-sound.mp3');
     this.audioService.preload('card-flip','../../assets/card-flip.mp3');
     this.audioService.preload('card-declare','../../assets/card-declare.mp3');
     this.audioService.preload('bullshit','../../assets/bullshit.mp3');
     this.audioService.preload('yayy','../../assets/yayy.mp3');
     this.audioService.preload('oops','../../assets/oops.mp3');
-
   }
 }

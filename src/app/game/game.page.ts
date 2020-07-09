@@ -233,7 +233,6 @@ export class GamePage implements OnInit {
 
   bullshit(){
     this.isBullshitClicked=true;
-    this.audioService.play('bullshit');
     const body={
       from:{
         id: this.customService.currentUser.uid,
@@ -252,6 +251,12 @@ export class GamePage implements OnInit {
     this.socket.emit('bullshit',body,(res)=>{
       this.isBullshitClicked=false;
       this.gameService.presentToast(res.text);
+      if(res.isLiar===true){
+        this.audioService.play('yayy');
+     }
+     else{
+        this.audioService.play('oops');
+     }
     });
   }
 

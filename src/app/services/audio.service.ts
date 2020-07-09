@@ -14,7 +14,7 @@ export class AudioService {
 
   private sounds: Sound[] = [];
   private audioPlayer: HTMLAudioElement = new Audio();
-  private forceWebAudio: boolean = true;
+  private audioQueue:Sound[]=[];
 
   constructor(
     private platform: Platform,
@@ -23,7 +23,7 @@ export class AudioService {
 
   preload(key: string, asset: string): void {
 
-    if(this.platform.is('cordova') && !this.forceWebAudio){
+    if(this.platform.is('cordova')){
 
       this.nativeAudio.preloadSimple(key, asset);
 
@@ -59,8 +59,25 @@ export class AudioService {
         console.log(err);
       });
     } else {
-      this.audioPlayer.src = soundToPlay.asset;
-      this.audioPlayer.play();
+
+      if(!this.audioPlayer.src || this.audioPlayer.ended || soundToPlay.asset===this.audioPlayer.src){
+        this.audioPlayer.src = soundToPlay.asset;
+        this.audioPlayer.play();
+      }
+      else{
+        this.audioQueue.push(soundToPlay);
+      }
     }
+  }
+
+  onAudioEnd(){
+    this.audioPlayer.addEventListener('ended',()=>{
+      console.log('ended');
+      if(this.audioQueue.length!=0){
+        const soundToPlay=this.audioQueue.shift();
+        this.audioPlayer.src=soundToPlay.asset;
+        this.audioPlayer.play();
+      }
+    })
   }
 }

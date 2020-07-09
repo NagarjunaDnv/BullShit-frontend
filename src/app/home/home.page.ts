@@ -11,9 +11,10 @@ export class HomePage implements OnInit{
 
   constructor(
     public authService: AuthService,
+    private audioService: AudioService
   ) {}
   
   ngOnInit(){
-
+    
   }
 }
