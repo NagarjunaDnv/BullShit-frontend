@@ -84,6 +84,7 @@ export class GameService {
   }
   listenForBullShitClicks(){
     this.socket.on('bullshitClicks',res=>{
+      this.audioService.play('bullshit');
       this.currentLiarProposal=res;
     })
   }
@@ -153,7 +154,7 @@ export class GameService {
   async presentToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
-      duration: 3000,
+      duration: 4000,
       color:'danger',
       position:'top'
     });
@@ -166,6 +167,12 @@ export class GameService {
     this.socket.on('liarToasts',res=>{
     console.log(res)
      this.presentToast(res['text']);
+     if(res.isLiar===true){
+        this.audioService.play('yayy');
+     }
+     else{
+        this.audioService.play('oops');
+     }
     })
   }
   listenForWin(){

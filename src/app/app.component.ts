@@ -62,5 +62,9 @@ export class AppComponent implements OnInit{
     this.audioService.preload('card-click','../../assets/click-sound.mp3');
     this.audioService.preload('card-flip','../../assets/card-flip.mp3');
     this.audioService.preload('card-declare','../../assets/card-declare.mp3');
+    this.audioService.preload('bullshit','../../assets/bullshit.mp3');
+    this.audioService.preload('yayy','../../assets/yayy.mp3');
+    this.audioService.preload('oops','../../assets/oops.mp3');
+
   }
 }

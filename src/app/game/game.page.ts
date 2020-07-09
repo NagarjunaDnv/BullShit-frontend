@@ -233,6 +233,7 @@ export class GamePage implements OnInit {
 
   bullshit(){
     this.isBullshitClicked=true;
+    this.audioService.play('bullshit');
     const body={
       from:{
         id: this.customService.currentUser.uid,

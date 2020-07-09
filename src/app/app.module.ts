@@ -20,8 +20,8 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 
 let config:SocketIoConfig={
-  url: "https://bullshit-game96.herokuapp.com",
-  // url: "http://localhost:8000",
+  // url: "https://bullshit-game96.herokuapp.com",
+  url: "http://localhost:8000",
   options:{}
 }
 
